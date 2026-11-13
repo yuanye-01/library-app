@@ -5,7 +5,7 @@
 ============================================================ -->
 <template>
   <header class="app-header">
-    <div class="brand" @click="$router.push('/books')">📚 图书借阅管理系统</div>
+    <div class="brand" @click="$router.push('/books')">图书借阅管理系统</div>
     <el-menu mode="horizontal" :default-active="activePath" router :ellipsis="false" class="menu">
       <el-menu-item index="/books">图书列表</el-menu-item>
       <template v-if="user.isAdmin">

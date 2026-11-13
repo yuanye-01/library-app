@@ -31,7 +31,12 @@ const routes = [
 
   // ---------- 管理员专属区域 ----------
   { path: '/admin/books', component: () => import('../views/admin/BookManage.vue'), meta: { requiresAuth: true, requiresAdmin: true, title: '图书管理' } },
-  { path: '/admin/stats', component: () => import('../views/admin/Stats.vue'), meta: { requiresAuth: true, requiresAdmin: true, title: '统计面板' } }
+  { path: '/admin/stats', component: () => import('../views/admin/Stats.vue'), meta: { requiresAuth: true, requiresAdmin: true, title: '统计面板' } },
+
+  // ---------- 移动端读者页（Vant，题目"移动端场景"） ----------
+  { path: '/m', redirect: '/m/books' },
+  { path: '/m/books', component: () => import('../views/mobile/MBooks.vue'), meta: { requiresAuth: true, title: '图书检索（移动端）' } },
+  { path: '/m/book/:id', component: () => import('../views/mobile/MBookDetail.vue'), meta: { requiresAuth: true, title: '图书详情（移动端）' } }
 ]
 
 const router = createRouter({

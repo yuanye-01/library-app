@@ -13,6 +13,7 @@
         <el-menu-item index="/admin/stats">统计面板</el-menu-item>
       </template>
       <el-menu-item v-else index="/center/borrowed">我的借阅</el-menu-item>
+      <el-menu-item index="/m/books">移动端</el-menu-item>
     </el-menu>
     <div class="user-box">
       <span class="user-name" @click="$router.push('/center/profile')">

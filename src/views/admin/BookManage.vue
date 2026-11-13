@@ -125,6 +125,7 @@ export default {
       this.dialogVisible = true
     },
     save() {
+      if (this.saving) return                    // 防重复提交（连点/焦点残留双触发）
       this.$refs.formRef.validate(async (ok) => {
         if (!ok) return                                    // 校验不过：红字提示，不发请求
         this.saving = true

@@ -1,0 +1,58 @@
+# ============================================================
+# pages.yml —— GitHub Pages 自动部署工作流
+# 触发：push 到 master 或手动运行（workflow_dispatch）
+# 流程：npm ci 安装 → vite build（base=/library-app/，静态资源
+#       绝对路径对齐 Pages 子路径）→ 上传产物 → 发布到 Pages。
+# 仓库 Settings → Pages → Build and deployment → Source 选
+# "GitHub Actions" 后，每次推送自动重新部署。
+# ============================================================
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (base = /library-app/)
+        run: npx vite build --base=/library-app/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

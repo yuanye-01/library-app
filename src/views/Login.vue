@@ -20,6 +20,9 @@
         </el-form-item>
       </el-form>
       <p class="tip">演示账号：admin / 123456（管理员）　reader / 123456（读者）</p>
+      <p class="tip">
+        还没有账号？<el-link type="primary" :underline="false" @click="$router.push('/register')">注册读者账号</el-link>
+      </p>
     </el-card>
   </div>
 </template>

@@ -10,8 +10,10 @@ const KEY = 'library-app-db-v1'
 
 const SEED = {
   users: [
-    { id: 'u1', username: 'admin', password: '123456', name: '张管理员', role: 'admin' },
-    { id: 'u2', username: 'reader', password: '123456', name: '李读者', role: 'reader' }
+    { id: 'u1', username: 'admin', password: '123456', name: '张管理员', role: 'admin', status: 'active' },
+    { id: 'u2', username: 'reader', password: '123456', name: '李读者', role: 'reader', status: 'active' },
+    { id: 'u3', username: 'wangxm', password: '123456', name: '王小明', role: 'reader', status: 'active' },
+    { id: 'u4', username: 'zhaomin', password: '123456', name: '赵敏', role: 'reader', status: 'frozen' }
   ],
   books: [
     { id: 'b1', name: 'Vue.js前端开发实战（第2版）', author: '黑马程序员', category: '前端开发', stock: 4, publisher: '人民邮电出版社', description: '以实战为导向讲解 Vue 3 组件、路由、状态管理与项目开发流程，配套课程实验教材。' },
@@ -28,7 +30,9 @@ const SEED = {
   borrowRecords: [
     { id: 'r1', bookId: 'b6', userId: 'u2', borrowDate: '2026-10-10', dueDate: '2026-11-01', status: 'borrowed' },
     { id: 'r2', bookId: 'b1', userId: 'u2', borrowDate: '2026-11-05', dueDate: '2026-12-05', status: 'borrowed' },
-    { id: 'r3', bookId: 'b2', userId: 'u2', borrowDate: '2026-09-01', dueDate: '2026-10-01', status: 'returned' }
+    { id: 'r3', bookId: 'b2', userId: 'u2', borrowDate: '2026-09-01', dueDate: '2026-10-01', status: 'returned' },
+    { id: 'r4', bookId: 'b4', userId: 'u3', borrowDate: '2026-11-10', dueDate: '2026-12-10', status: 'borrowed' },
+    { id: 'r5', bookId: 'b5', userId: 'u4', borrowDate: '2026-09-20', dueDate: '2026-10-20', status: 'borrowed' }
   ]
 }
 
@@ -79,6 +83,30 @@ export const local = {
   },
   async getUsers() {
     return load().users
+  },
+  async getReaders() {
+    return load().users.filter((u) => u.role === 'reader')
+  },
+  async createReader(data) {
+    const db = load()
+    const user = { status: 'active', ...data, role: 'reader', id: rid('u') }
+    db.users.push(user)
+    save(db)
+    return user
+  },
+  async updateReader(id, data) {
+    const db = load()
+    const i = db.users.findIndex((u) => u.id === id)
+    if (i === -1) return null
+    db.users[i] = { ...data, id }
+    save(db)
+    return db.users[i]
+  },
+  async deleteReader(id) {
+    const db = load()
+    db.users = db.users.filter((u) => u.id !== id)
+    save(db)
+    return {}
   },
   async getBorrows() {
     return load().borrowRecords

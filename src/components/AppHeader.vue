@@ -10,6 +10,7 @@
       <el-menu-item index="/books">图书列表</el-menu-item>
       <template v-if="user.isAdmin">
         <el-menu-item index="/admin/books">图书管理</el-menu-item>
+        <el-menu-item index="/admin/readers">读者管理</el-menu-item>
         <el-menu-item index="/admin/stats">统计面板</el-menu-item>
       </template>
       <el-menu-item v-else index="/center/borrowed">我的借阅</el-menu-item>

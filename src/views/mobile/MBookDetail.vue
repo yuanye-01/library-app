@@ -119,7 +119,11 @@ export default {
   methods: {
     async load() {
       this.loaded = false
-      this.book = await fetchBook(this.$route.params.id)
+      try {
+        this.book = await fetchBook(this.$route.params.id)
+      } catch (e) {
+        this.book = null        // 404（编号不存在）→ 统一转空状态
+      }
       this.loaded = true
       if (!this.user.isAdmin) {
         this.myRecords = await fetchBorrowsByUser(this.user.id).catch(() => [])

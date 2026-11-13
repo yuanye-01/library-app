@@ -12,6 +12,7 @@ import { useUserStore } from '../stores/user'
 const routes = [
   { path: '/', redirect: '/books' },
   { path: '/login', component: () => import('../views/Login.vue'), meta: { title: '登录' } },
+  { path: '/register', component: () => import('../views/Register.vue'), meta: { title: '读者注册' } },
 
   // ---------- 读者与管理员共用区域（需登录） ----------
   { path: '/books', component: () => import('../views/Books.vue'), meta: { requiresAuth: true, title: '图书列表' } },
@@ -31,6 +32,7 @@ const routes = [
 
   // ---------- 管理员专属区域 ----------
   { path: '/admin/books', component: () => import('../views/admin/BookManage.vue'), meta: { requiresAuth: true, requiresAdmin: true, title: '图书管理' } },
+  { path: '/admin/readers', component: () => import('../views/admin/Readers.vue'), meta: { requiresAuth: true, requiresAdmin: true, title: '读者管理' } },
   { path: '/admin/stats', component: () => import('../views/admin/Stats.vue'), meta: { requiresAuth: true, requiresAdmin: true, title: '统计面板' } },
 
   // ---------- 移动端读者页（Vant，题目"移动端场景"） ----------

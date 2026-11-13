@@ -1,7 +1,9 @@
 {
   "users": [
-    { "id": "u1", "username": "admin", "password": "123456", "name": "张管理员", "role": "admin" },
-    { "id": "u2", "username": "reader", "password": "123456", "name": "李读者", "role": "reader" }
+    { "id": "u1", "username": "admin", "password": "123456", "name": "张管理员", "role": "admin", "status": "active" },
+    { "id": "u2", "username": "reader", "password": "123456", "name": "李读者", "role": "reader", "status": "active" },
+    { "id": "u3", "username": "wangxm", "password": "123456", "name": "王小明", "role": "reader", "status": "active" },
+    { "id": "u4", "username": "zhaomin", "password": "123456", "name": "赵敏", "role": "reader", "status": "frozen" }
   ],
   "books": [
     {
@@ -119,6 +121,22 @@
       "borrowDate": "2026-09-01",
       "dueDate": "2026-10-01",
       "status": "returned"
+    },
+    {
+      "id": "r4",
+      "bookId": "b4",
+      "userId": "u3",
+      "borrowDate": "2026-11-10",
+      "dueDate": "2026-12-10",
+      "status": "borrowed"
+    },
+    {
+      "id": "r5",
+      "bookId": "b5",
+      "userId": "u4",
+      "borrowDate": "2026-09-20",
+      "dueDate": "2026-10-20",
+      "status": "borrowed"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

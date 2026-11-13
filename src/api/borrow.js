@@ -28,14 +28,24 @@ export function isOverdue(record) {
 export const fetchBorrows = () => db.getBorrows()
 export const fetchBorrowsByUser = (userId) => db.getBorrowsByUser(userId)
 
+// 借阅上限：每位读者同时在借上限（图书馆通行规则）
+export const MAX_BORROW = 5
+
 // 借书：校验 → 建记录 → 减库存
 export async function borrowBook(book, user) {
+  if (user.status === 'frozen') {
+    throw new Error('账号已被冻结，暂时无法借阅，请联系管理员')
+  }
   if (book.stock <= 0) {
     throw new Error('库存不足，这本书暂时借不了')
   }
   const mine = await db.getBorrowsByUser(user.id)
-  if (mine.some((r) => r.bookId === book.id && r.status === 'borrowed')) {
+  const active = mine.filter((r) => r.status === 'borrowed')
+  if (active.some((r) => r.bookId === book.id)) {
     throw new Error('同一本书在借期间不能重复借阅')
+  }
+  if (active.length >= MAX_BORROW) {
+    throw new Error(`借阅数量已达上限（每人最多 ${MAX_BORROW} 本），请先归还再借`)
   }
   const borrowDate = today()
   const record = await db.createBorrow({

@@ -12,7 +12,8 @@ export const useUserStore = defineStore('user', {
     id: '',
     username: '',
     name: '',
-    role: ''        // 'admin' = 图书管理员 / 'reader' = 读者
+    role: '',        // 'admin' = 图书管理员 / 'reader' = 读者
+    status: ''       // 'active' 正常 / 'frozen' 冻结（冻结账号能登录但不能借书）
   }),
   getters: {
     isLogin: (state) => state.id !== '',
@@ -29,6 +30,7 @@ export const useUserStore = defineStore('user', {
       this.username = users[0].username
       this.name = users[0].name
       this.role = users[0].role
+      this.status = users[0].status || 'active'
       return true
     },
     // 退出：仓库清回出厂设置（persist 插件会同步清掉 localStorage）

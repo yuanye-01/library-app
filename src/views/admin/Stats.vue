@@ -83,6 +83,7 @@ export default {
   mounted() {
     Promise.all([fetchBooks(), fetchBorrows(), fetchUsers()])
       .then(([books, borrows, users]) => {
+        this.readers = users.filter((u) => u.role === 'reader')   // 只统计读者，排除管理员账号
         this.books = books
         this.borrows = borrows
         this.readers = users

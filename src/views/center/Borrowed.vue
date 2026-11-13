@@ -43,7 +43,7 @@
     </el-table>
 
     <p class="muted summary">
-      共 {{ rows.length }} 条：在借 {{ borrowingCount }} / 已还 {{ returnedCount }} / 超期 {{ overdueCount }}（超期行整行标红）
+      共 {{ rows.length }} 条：在借 {{ borrowingCount }} / 已还 {{ returnedCount }} / 超期 {{ overdueCount }}（超期行整行标红，借阅上限 5 本）
     </p>
   </div>
 </template>

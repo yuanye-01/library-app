@@ -5,7 +5,7 @@
 // persist: true 让登录态写进 localStorage——刷新页面不掉线（守卫据此放行）。
 // ============================================================
 import { defineStore } from 'pinia'
-import { loginByUsername } from '../api/users'
+import { getUserByUsername } from '../api/users'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -19,11 +19,11 @@ export const useUserStore = defineStore('user', {
     isAdmin: (state) => state.role === 'admin'
   },
   actions: {
-    // 登录：拿账号密码问服务器，对上就把人写进仓库
+    // 登录：按用户名查人 → 比对密码（见 api/users.js 注释：password 不能作为查询条件）
     async login(username, password) {
-      const users = await loginByUsername(username, password)
-      if (users.length === 0) {
-        return false      // 对不上暗号
+      const users = await getUserByUsername(username)
+      if (users.length === 0 || users[0].password !== password) {
+        return false      // 用户名不存在或密码不对
       }
       this.id = users[0].id
       this.username = users[0].username

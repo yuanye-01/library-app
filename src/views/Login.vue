@@ -50,7 +50,8 @@ export default {
           const success = await useUserStore().login(this.form.username, this.form.password)
           if (success) {
             ElMessage.success('登录成功')
-            this.$router.push('/books')
+            // 优先回跳守卫记下的原地址（如被拦截的 /admin/books），否则进列表
+            this.$router.push(this.$route.query.redirect || '/books')
           } else {
             ElMessage.error('账号或密码错误')
           }

@@ -49,7 +49,8 @@ const router = createRouter({
 router.beforeEach((to) => {
   const user = useUserStore()
   if (to.meta.requiresAuth && !user.isLogin) {
-    return '/login'          // 未登录：一律先去登录页
+    // 记住被拦截地址：登录成功后回跳原页面（redirect 参数）
+    return { path: '/login', query: { redirect: to.fullPath } }
   }
   if (to.meta.requiresAdmin && !user.isAdmin) {
     return '/books'          // 登录了但不是管理员：送回列表页

@@ -1,0 +1,11 @@
+/* style.css —— 全局基础样式 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  background: #f0f2f5;
+  color: #303133;
+  font-size: 14px;
+}
+#app { min-height: 100vh; }
+.page { max-width: 1000px; margin: 20px auto; padding: 0 16px; }
+.muted { color: #909399; font-size: 13px; margin: 6px 0 14px; }

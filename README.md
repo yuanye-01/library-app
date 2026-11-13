@@ -2,6 +2,9 @@
 
 面向高校图书馆的借阅业务系统：读者在线检索与借阅，管理员维护藏书与借还台账。
 
+**仓库地址**：https://github.com/yuanye-01/library-app
+**线上部署**：https://yuanye-01.github.io/library-app/ （push 到 master 自动构建发布）
+
 ## 技术栈
 
 Vue 3（选项式 API）+ Vite + Vue Router（动态 / 嵌套 / 守卫 / 懒加载）+ Element Plus（PC 端）+ Vant（移动端）+ Axios + Pinia + pinia-plugin-persistedstate + json-server。

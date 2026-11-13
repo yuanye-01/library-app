@@ -10,7 +10,7 @@
 
     <div v-if="book" class="detail">
       <div class="d-top">
-        <BookCover :name="book.name" :category="book.category" :size="96" />
+        <BookCover :name="book.name" :category="book.category" :author="book.author" :size="96" />
         <div class="d-info">
           <h2 class="d-name">{{ book.name }}</h2>
           <p class="d-line">{{ book.author }} · {{ book.publisher }}</p>

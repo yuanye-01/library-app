@@ -16,7 +16,7 @@
       <div v-for="row in filtered" :key="row.id" class="card-wrap" @click="goDetail(row)">
         <van-card>
           <template #thumb>
-            <BookCover :name="row.name" :category="row.category" :size="56" />
+            <BookCover :name="row.name" :category="row.category" :author="row.author" :size="56" />
           </template>
           <template #title>
             <span class="b-name">{{ row.name }}</span>

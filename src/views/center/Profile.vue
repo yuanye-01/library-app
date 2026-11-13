@@ -17,7 +17,7 @@
     <el-table v-if="favBooks.length" :data="favBooks" border>
       <el-table-column label="封面" width="70">
         <template #default="{ row }">
-          <BookCover :name="row.name" :category="row.category" :size="34" />
+          <BookCover :name="row.name" :category="row.category" :author="row.author" :size="34" />
         </template>
       </el-table-column>
       <el-table-column prop="name" label="书名" min-width="220" />

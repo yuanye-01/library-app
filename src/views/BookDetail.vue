@@ -10,7 +10,7 @@
 
     <el-card v-if="book" class="detail-card">
       <div class="detail-top">
-        <BookCover :name="book.name" :category="book.category" :size="120" />
+        <BookCover :name="book.name" :category="book.category" :author="book.author" :size="120" />
         <div class="detail-info">
           <h2 class="book-name">{{ book.name }}</h2>
           <el-descriptions :column="1" border size="small" class="desc-table">
